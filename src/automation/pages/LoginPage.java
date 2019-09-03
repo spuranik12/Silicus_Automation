@@ -13,7 +13,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import automation.common.AutoLogger;
 import automation.common.BasePage;
 
-public class LoginPage extends automation.common.BasePage {
+public class LoginPage extends BasePage {
 	
 	@FindBy(name = "userName")
 	WebElement username;

@@ -7,7 +7,7 @@
   	<test name="Demo test 1" >
 	    <classes>
 	      <class name="automation.tests.LoginPageTest"/>
-	      <class name="automation.tests.PersonalDetailsTest"/>
+	       <class name="automation.tests.FlightFinderTest"/>
 	    </classes>
  	</test>
 </suite>

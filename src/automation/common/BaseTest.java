@@ -58,12 +58,6 @@ public class BaseTest {
 	private AppiumDriver<WebElement> mDriver;
 	DesiredCapabilities caps = new DesiredCapabilities();
 
-	/*protected TestlinkUtils testlink;
-	protected String testlinkProjectName;
-	protected String testlinkPlanName;
-	protected String testlinkBuildName;
-	protected String testCaseName;*/
-
 	public Properties getPropertiesData(){
 		try{
 			properties = new Properties();
@@ -82,15 +76,6 @@ public class BaseTest {
 	}
 
 	public void launchBrowser() throws MalformedURLException{
-		/*String Node = "http://10.55.0.31:4444/wd/hub";
- 		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
- 		capabilities.setPlatform(org.openqa.selenium.Platform.WINDOWS);
- 		ChromeOptions options = new ChromeOptions();
-		options.addArguments("test-type");
-		options.addArguments("ignore-certificate-errors");
-		options.addArguments("no-sandbox");
-		capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-		driver = new RemoteWebDriver(new URL(Node), capabilities);*/
 		System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/drivers/chromedriver.exe");
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("test-type");
@@ -114,8 +99,6 @@ public class BaseTest {
 			options.addArguments("test-type");
 			options.addArguments("ignore-certificate-errors");
 			options.addArguments("no-sandbox");
-			/*options.addArguments("--always-authorize-plugins");
-			options.addArguments("--allow-outdated-plugins");*/
 			options.addArguments("disable-infobars");
 			caps.setCapability(ChromeOptions.CAPABILITY, options);
 			System.setProperty("selenide.browser", "chrome");
@@ -156,11 +139,9 @@ public class BaseTest {
 					this.driver = mDriver;
 				}
 			}
-			//isMobile = true;
+			
 			EventFiringWebDriver eventFiringWebDriver = new EventFiringWebDriver(mDriver);
-			/*handle = new ActivityCapture(this.getClass(),logger);
-			eventFiringWebDriver.register(handle);
-		*/	break;
+			break;
 		}
 	}
 
@@ -186,36 +167,11 @@ public class BaseTest {
 	@BeforeMethod
 	public void getEnviromentReady() throws MalformedURLException{
 		launchBrowser();
-		/*testlinkProjectName = properties.getProperty("testlinkProjectName");
-		testlinkPlanName = properties.getProperty("testlinkPlanName");
-		testlinkBuildName = properties.getProperty("testlinkBuildName");
-		testlink = new TestlinkUtils(properties.getProperty("devKey"), properties.getProperty("serverURL"), testlinkProjectName, testlinkPlanName, testlinkBuildName);*/
 	}
 
-	/** COMMENTED, AS NO MORE USE OF TESTLINK, WHICH CAN BE USED In FUTURE IF NEEDED. ELSE SAME METHOD IS USED BELOW WITHOUT TESTLINK. ***/
-	
-	/*@AfterMethod
-	public void quitBrowserAndUpdateTestlinkResult(ITestResult result) throws TestLinkAPIException, testlink.api.java.client.TestLinkAPIException{
-		if (result.getStatus() == ITestResult.FAILURE) {
-			logger.log(LogStatus.FAIL, result.getThrowable());
-
-			child.log(LogStatus.FAIL, "Test Failed");
-			child.log(LogStatus.FAIL, result.getThrowable());
-		} else if (result.getStatus() == ITestResult.SKIP) {
-			child.log(LogStatus.SKIP, "Test skipped " + result.getThrowable());
-		} else {
-			child.log(LogStatus.PASS, "Test passed");
-		}
-		quitBrowser();
-		report.endTest(child);
-		//testlink.reportResult(testlinkProjectName, testlinkPlanName, testCaseName, testlinkBuildName, handler.getLogs(), testlink.getResult());
-	}*/
-	
 	@AfterMethod
 	public void quitBrowserAndUpdateTestlinkResult(ITestResult result) throws TestLinkAPIException{
 		if (result.getStatus() == ITestResult.FAILURE) {
-			/*logger.log(LogStatus.FAIL, result.getThrowable());*/
-
 			child.log(LogStatus.FAIL, "Test Failed");
 			child.log(LogStatus.FAIL, result.getThrowable());
 		} else if (result.getStatus() == ITestResult.SKIP) {
@@ -225,7 +181,6 @@ public class BaseTest {
 		}
 		quitBrowser();
 		report.endTest(child);
-		//testlink.reportResult(testlinkProjectName, testlinkPlanName, testCaseName, testlinkBuildName, handler.getLogs(), testlink.getResult());
 	}
 
 	@AfterClass
